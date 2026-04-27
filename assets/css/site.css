@@ -259,7 +259,7 @@ textarea {
 
 .nav-dropdown__menu {
   position: absolute;
-  left: 0;
+  right: 0;
   top: calc(100% + 18px);
   width: min(640px, calc(100vw - 48px));
   display: grid;
@@ -492,11 +492,13 @@ textarea {
   letter-spacing: -0.03em;
 }
 
-.hero h1 {
+.hero h1,
+.hero h2 {
   animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.home-page .hero h1 {
+.home-page .hero h1,
+.home-page .hero h2 {
   line-height: 1.14;
 }
 
@@ -1567,6 +1569,44 @@ textarea {
   margin-top: 30px;
 }
 
+.profile-connect-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 100%;
+  border-color: rgba(201, 168, 108, 0.42);
+  background:
+    linear-gradient(135deg, rgba(201, 168, 108, 0.18) 0%, rgba(255, 255, 255, 0.05) 46%, rgba(10, 10, 10, 0.32) 100%),
+    #101010;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.24);
+}
+
+.profile-connect-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 3px;
+  background: var(--gold);
+}
+
+.profile-connect-card h3 {
+  max-width: 12ch;
+  font-size: clamp(28px, 3.4vw, 42px);
+  line-height: 1.08;
+}
+
+.profile-connect-card p {
+  max-width: 58ch;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.profile-connect-card .stacked-actions {
+  margin-top: 34px;
+}
+
+.profile-connect-card .btn {
+  min-width: 160px;
+}
+
 .mt-0 {
   margin-top: 0;
 }
@@ -1814,6 +1854,7 @@ html[data-cookie-consent] .cookie-banner {
 
   .nav-dropdown__menu {
     position: static;
+    right: auto;
     width: 100%;
     margin-top: 8px;
     grid-template-columns: 1fr;
@@ -2035,14 +2076,15 @@ html[data-cookie-consent] .cookie-banner {
   }
 
   .hero-slider__stage {
-    min-height: auto;
+    min-height: max(620px, calc(100svh - 72px));
   }
 
   .home-page .hero--dark {
     background-position: center, center, 66% center;
   }
 
-  .home-page .hero h1 {
+  .home-page .hero h1,
+  .home-page .hero h2 {
     font-size: 34px;
     line-height: 1.16;
   }
