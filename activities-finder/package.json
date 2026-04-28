@@ -1,0 +1,12 @@
+{
+  "name": "activity-finder-original-html-json",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "start": "vite --host 127.0.0.1"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0"
+  }
+}
