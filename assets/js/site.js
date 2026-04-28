@@ -10,6 +10,7 @@
 
 const aboutMenuItems = [
   { href: "about.html", title: "About IRAA Global", description: "Firm story, positioning, and philosophy." },
+  { href: "company.html", title: "Company Structure", description: "Affiliated entities and legal structure." },
   { href: "our-team.html", title: "Our Team", description: "Meet the wider advisory and support team." },
   { href: "why-choose-us.html", title: "Why Choose Us", description: "See what makes the firm distinct." },
   { href: "careers.html", title: "Careers", description: "Explore opportunities to join IRAA Global." }
@@ -76,6 +77,7 @@ function mountSharedFooter() {
           <h3 class="footer__title">Company</h3>
           <div class="footer__list">
             <a href="about.html">About The Firm</a>
+            <a href="company.html">Company Structure</a>
             <a href="our-team.html">Our Team</a>
             <a href="why-choose-us.html">Why Choose Us</a>
             <a href="careers.html">Careers</a>
@@ -103,7 +105,7 @@ function mountSharedFooter() {
           <p>&copy; <span class="js-year">2026</span> Copyright owned by one or more of the Iraa Global entities. All rights reserved.</p>
           <p>Iraa Global refers to the holding entity, Iraa Global LLC FZ, which owns and manages the IRAA brand and oversees its associated entities. Iraa Global LLC FZ does not directly provide services to clients.</p>
           <p>The IRAA brand operates through a network of affiliated entities, all registered in Dubai Mainland, including IRAA Accountants LLC, IRAA Management Consultants LLC, IRAA Properties LLC, and Rays and Insight Chartered Accountants LLC (partner firm). Each entity is a separate legal entity and operates independently.</p>
-          <p>For more information about the structure of Iraa Global and its affiliated entities, please visit <a href="https://www.iraaglobal.com/company" target="_blank" rel="noopener noreferrer">www.iraaglobal.com/company</a>.</p>
+          <p>For more information about the structure of Iraa Global and its affiliated entities, please visit <a href="company.html">www.iraaglobal.com/company</a>.</p>
         </div>
         <div class="footer__legal">
           <a href="#">Privacy Policy</a>
@@ -403,6 +405,7 @@ function initHeroSlider() {
   }
 
   const slides = Array.from(slider.querySelectorAll("[data-hero-slide]"));
+  const dots = Array.from(slider.querySelectorAll("[data-hero-dot]"));
 
   if (slides.length < 2) {
     return;
@@ -424,6 +427,16 @@ function initHeroSlider() {
 
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === currentIndex);
+    });
+
+    dots.forEach((dot, dotIndex) => {
+      const isActive = dotIndex === currentIndex;
+      dot.classList.toggle("is-active", isActive);
+      if (isActive) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
     });
   }
 
@@ -447,6 +460,14 @@ function initHeroSlider() {
 
   slider.addEventListener("mouseenter", stopAutoPlay);
   slider.addEventListener("mouseleave", startAutoPlay);
+
+  dots.forEach((dot, dotIndex) => {
+    dot.addEventListener("click", () => {
+      stopAutoPlay();
+      render(dotIndex);
+      startAutoPlay();
+    });
+  });
 
   slider.addEventListener("pointerdown", (event) => {
     dragStartX = event.clientX;
@@ -508,8 +529,8 @@ function initCookieBanner() {
   banner.innerHTML = `
     <div class="cookie-banner__content">
       <div class="cookie-banner__copy">
-        <h3>We value your privacy</h3>
-        <p>We use cookies and related technologies to improve site performance, remember your preferences, and understand how visitors use the site. You can accept all cookies or manage your choices.</p>
+        <h3>Cookie preferences</h3>
+        <p>We use cookies to improve performance and remember preferences.</p>
       </div>
       <div class="cookie-banner__actions">
         <button class="cookie-banner__manage" type="button">Manage Choices</button>

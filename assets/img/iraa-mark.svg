@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="IRAA Global">
-  <rect width="128" height="128" rx="24" fill="#0a0a0a"/>
-  <rect x="16" y="16" width="96" height="96" rx="18" fill="none" stroke="#c9a86c" stroke-width="2"/>
-  <path d="M40 34h8v60h-8zm18 0h10l18 60h-8.4l-4.2-14H56.5l-4 14H44zm6.6 39h13.2l-6.8-23.2z" fill="#c9a86c"/>
-  <path d="M90 34h8v60h-8z" fill="#c9a86c"/>
-</svg>
