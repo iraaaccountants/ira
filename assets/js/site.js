@@ -16,10 +16,45 @@ const aboutMenuItems = [
   { href: "careers.html", title: "Careers", description: "Explore opportunities to join IRAA Global." }
 ];
 
+const siteScript = document.currentScript || document.querySelector('script[src$="assets/js/site.js"]');
+const siteRoot = (() => {
+  const scriptSrc = siteScript?.getAttribute("src") || "";
+  const match = scriptSrc.match(/^(.*)assets\/js\/site\.js(?:\?.*)?$/);
+  return match ? match[1] : "";
+})();
+
+function isSiteRelativePath(value) {
+  return Boolean(value) && !value.startsWith("#") && !value.startsWith("//") && !/^[a-z][a-z0-9+.-]*:/i.test(value);
+}
+
+function siteUrl(path) {
+  return isSiteRelativePath(path) ? `${siteRoot}${path}` : path;
+}
+
+function resolveSitePaths(scope) {
+  scope.querySelectorAll("a[href]").forEach((link) => {
+    const href = link.getAttribute("href");
+
+    if (isSiteRelativePath(href)) {
+      link.setAttribute("href", siteUrl(href));
+    }
+  });
+
+  scope.querySelectorAll("img[src]").forEach((image) => {
+    const src = image.getAttribute("src");
+
+    if (isSiteRelativePath(src)) {
+      image.setAttribute("src", siteUrl(src));
+    }
+  });
+}
+
 const currentPage = (window.location.pathname.split("/").pop() || "index.html").toLowerCase();
 const navToggle = document.querySelector(".nav-toggle");
 const siteNav = document.querySelector(".site-nav");
-const indiaUaeNavLink = siteNav?.querySelector('a[href="india-uae-advisory.html"]');
+const indiaUaeNavLink = Array.from(siteNav?.querySelectorAll("a") || []).find((link) => {
+  return (link.getAttribute("href") || "").endsWith("india-uae-advisory.html");
+});
 
 function mountSharedFooter() {
   const footer = document.querySelector(".footer");
@@ -91,9 +126,10 @@ function mountSharedFooter() {
           <div class="footer__list">
             <a href="contact.html">Company Profile</a>
             <a href="contact.html">Presskit and Brand</a>
-            <a href="contact.html">Book Consultation</a>
-            <a href="contact.html">Appointment</a>
+            <a href="consultation/">Book Consultation</a>
+            <a href="consultation/">Appointment</a>
             <a href="contact.html">Cost Calculator</a>
+            <a href="activities-finder/">Business Activities Checker</a>
             <a href="https://share.google/u3N4MPB7iI90cxNE3" target="_blank" rel="noopener noreferrer">Get Direction</a>
             <a href="https://g.page/r/CYyKTedOLYR8EBM/review" target="_blank" rel="noopener noreferrer">Rate Us Now</a>
           </div>
@@ -116,6 +152,8 @@ function mountSharedFooter() {
       </div>
     </div>
   `;
+
+  resolveSitePaths(footer);
 }
 
 mountSharedFooter();
@@ -129,7 +167,9 @@ function enhanceNavDropdown(label, href, items) {
     return null;
   }
 
-  const link = siteNav.querySelector(`a[href="${href}"]`);
+  const link = Array.from(siteNav.querySelectorAll("a")).find((candidate) => {
+    return (candidate.getAttribute("href") || "").endsWith(href);
+  });
 
   if (!link) {
     return null;
@@ -157,7 +197,7 @@ function enhanceNavDropdown(label, href, items) {
     const itemPage = item.href.split("#")[0].toLowerCase();
     const menuLink = document.createElement("a");
     menuLink.className = "nav-dropdown__item";
-    menuLink.href = item.href;
+    menuLink.href = siteUrl(item.href);
     if (itemPage === currentPage) {
       menuLink.setAttribute("aria-current", "page");
       toggle.dataset.current = "true";

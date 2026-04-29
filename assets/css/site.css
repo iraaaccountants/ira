@@ -1136,6 +1136,179 @@ textarea {
   font-weight: 400;
 }
 
+.consultation-hero {
+  background-image:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.58) 48%, rgba(0, 0, 0, 0.28) 100%),
+    url("../img/slider/dubai-landscape-slider-center.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.consultation-hero .hero__inner {
+  align-items: center;
+}
+
+.consultation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.consultation-layout > * {
+  min-width: 0;
+}
+
+.consultation-summary {
+  display: grid;
+  gap: 18px;
+}
+
+.consultation-summary--wide {
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+  align-items: stretch;
+}
+
+.consultation-advisor {
+  display: grid;
+  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
+  gap: 34px;
+  align-items: center;
+}
+
+.consultation-advisor > * {
+  min-width: 0;
+}
+
+.consultation-advisor__photo {
+  overflow: hidden;
+  border: 1px solid rgba(201, 168, 108, 0.28);
+  border-radius: var(--radius);
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.consultation-advisor__photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.consultation-advisor__content .hero__lede {
+  margin-bottom: 24px;
+}
+
+.consultation-advisor__facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.fee-card {
+  padding: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  background: #101010;
+  color: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.fee-card__label {
+  margin: 0 0 12px;
+  font-family: var(--sans);
+  font-size: 10px;
+  letter-spacing: 1.8px;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.fee-card__price {
+  margin: 0;
+  font-size: clamp(48px, 6vw, 74px);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.fee-card p,
+.fee-card li,
+.consultation-note,
+.calendly-shell__intro p,
+.calendly-fallback {
+  font-family: var(--sans);
+  line-height: 1.75;
+  font-size: 14px;
+}
+
+.fee-card p {
+  margin: 16px 0 0;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.fee-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 22px 0 0;
+  display: grid;
+  gap: 10px;
+}
+
+.fee-card li {
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.consultation-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+}
+
+.calendly-shell {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: var(--shadow);
+}
+
+.calendly-shell--full {
+  width: 100%;
+}
+
+.calendly-shell__intro {
+  padding: 28px 28px 0;
+}
+
+.calendly-shell__intro h2 {
+  margin: 0 0 10px;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 400;
+}
+
+.calendly-shell__intro p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.calendly-inline-widget {
+  min-width: 320px;
+  height: 760px;
+}
+
+.calendly-fallback {
+  margin: 0;
+  padding: 0 28px 28px;
+  color: var(--muted);
+}
+
+.calendly-fallback a {
+  color: var(--ink);
+  text-decoration-color: var(--gold);
+  text-underline-offset: 4px;
+}
+
 .contact-layout {
   display: grid;
   grid-template-columns: 0.85fr 1.15fr;
@@ -1923,6 +2096,10 @@ html[data-cookie-consent] .cookie-banner {
   .testimonial-shell,
   .pillars,
   .contact-layout,
+  .consultation-layout,
+  .consultation-summary--wide,
+  .consultation-advisor,
+  .consultation-advisor__facts,
   .office-grid,
   .section-split,
   .cta-banner,
@@ -2107,8 +2284,22 @@ html[data-cookie-consent] .cookie-banner {
   .timeline,
   .faq,
   .form-shell,
+  .fee-card,
   .compare-card {
     padding: 22px;
+  }
+
+  .calendly-shell__intro {
+    padding: 22px 22px 0;
+  }
+
+  .calendly-fallback {
+    padding: 0 22px 22px;
+  }
+
+  .calendly-inline-widget {
+    min-width: 100%;
+    height: 700px;
   }
 
   .home-page .hero__inner {
